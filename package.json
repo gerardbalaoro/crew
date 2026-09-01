@@ -1,0 +1,60 @@
+{
+  "name": "@gblab/crew",
+  "version": "0.1.0",
+  "description": "Set up the Crew of AI agents in your harnesses.",
+  "bin": {
+    "crew": "dist/bin.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "imports": {
+    "#agents": "./src/agents/index.ts",
+    "#agents/define": "./src/agents/define.ts",
+    "#app": "./src/app.ts",
+    "#commands/*": "./src/commands/*.ts",
+    "#harnesses": "./src/harnesses/index.ts",
+    "#harnesses/define": "./src/harnesses/define.ts",
+    "#harnesses/select": "./src/harnesses/select.ts",
+    "#harnesses/*": "./src/harnesses/*.ts",
+    "#support/*": "./src/support/*.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node dist/bin.mjs",
+    "dev": "oxnode src/bin.ts",
+    "prepare": "lefthook install",
+    "build": "tsdown",
+    "check": "oxlint && oxfmt --check && knip",
+    "test": "vitest run",
+    "format": "oxfmt",
+    "lint": "oxlint"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0",
+    "@optique/core": "^1.2.2",
+    "@optique/discover": "^1.2.2",
+    "@optique/run": "^1.2.2",
+    "globlin": "1.0.0-beta.1",
+    "gray-matter": "4.0.3",
+    "smol-toml": "1.8.0"
+  },
+  "devDependencies": {
+    "@oxc-node/cli": "^0.1.0",
+    "@oxlint/plugins": "1.78.0",
+    "@types/bun": "latest",
+    "@types/node": "^26.2.0",
+    "knip": "^6.32.3",
+    "lefthook": "^2.1.10",
+    "oxfmt": "^0.63.0",
+    "oxlint": "1.78.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "tsdown": "^0.22.14",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  }
+}

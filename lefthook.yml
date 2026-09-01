@@ -1,0 +1,13 @@
+pre-commit:
+  jobs:
+    - name: format
+      run: bun run format --no-error-on-unmatched-pattern --write {staged_files}
+      stage_fixed: true
+    - name: lint
+      run: bun run lint --fix --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true
+    - name: readme
+      glob:
+        - README.md
+        - src/agents/*.ts
+      run: bun scripts/readme.ts && git add README.md
