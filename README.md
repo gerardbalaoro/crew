@@ -47,10 +47,10 @@ Manage the agents on your user-level configuration.
 
 Pick harnesses to run `install`, `update`, and `uninstall`.
 
-| Option           | Description                                                             |
-| ---------------- | ----------------------------------------------------------------------- |
-| `--all`          | Use all detected harnesses without prompting.                           |
-| `--only HARNESS` | Use only the specified detected harness. Repeat for multiple harnesses. |
+| Option           | Description                                                    |
+| ---------------- | -------------------------------------------------------------- |
+| `--all`          | Use all detected harnesses without prompting.                  |
+| `--only HARNESS` | Use only the specified harness. Repeat for multiple harnesses. |
 
 ## Development
 

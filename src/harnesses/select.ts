@@ -27,7 +27,7 @@ export const harnessFilter = or(
   object({
     only: multiple(
       option("--only", string(), {
-        description: message`Use only the specified detected harness. Repeat for multiple harnesses.`,
+        description: message`Use only the specified harness. Repeat for multiple harnesses.`,
       }),
       { min: 1 },
     ),
@@ -39,7 +39,7 @@ export async function selectHarnesses(
   detected: readonly Harness[],
   selection: HarnessFilter,
 ): Promise<readonly Harness[]> {
-  if (detected.length === 0 || selection.all) {
+  if (selection.all) {
     return detected;
   }
 
@@ -50,12 +50,12 @@ export async function selectHarnesses(
       throw new Error(`Harnesses not supported: ${unsupported.join(", ")}.`);
     }
 
-    return detected.filter((harness) => selection.only.includes(harness.id));
+    return Harnesses.filter((harness) => selection.only.includes(harness.id));
   }
 
   const selected = await multiselect({
     message: "Choose target harnesses.",
-    options: detected.map((harness) => ({ value: harness.id, label: harness.name })),
+    options: Harnesses.map((harness) => ({ value: harness.id, label: harness.name })),
     initialValues: detected.map((harness) => harness.id),
     required: true,
   });
@@ -64,5 +64,5 @@ export async function selectHarnesses(
     return [];
   }
 
-  return detected.filter((harness) => selected.includes(harness.id));
+  return Harnesses.filter((harness) => selected.includes(harness.id));
 }
