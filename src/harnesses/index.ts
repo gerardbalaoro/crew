@@ -1,10 +1,11 @@
 import type { Harness, HarnessActionOptions } from "./define";
 
+import Claude from "./claude/harness";
 import Codex from "./codex/harness";
 import Omp from "./omp/harness";
 import OpenCode from "./opencode/harness";
 
-export const Harnesses: Harness[] = [OpenCode, Omp, Codex].toSorted((a, b) =>
+export const Harnesses: Harness[] = [Claude, OpenCode, Omp, Codex].toSorted((a, b) =>
   a.name.localeCompare(b.name),
 );
 

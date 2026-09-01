@@ -1,6 +1,6 @@
 # Crew
 
-Crew is a small team of AI agents for **OpenCode**, **Oh My Pi**, and **Codex**.
+Crew is a small team of AI agents for **OpenCode**, **Oh My Pi**, **Codex**, and **Claude Code**.
 It installs the same set of named agents into every supported harness available
 on your machine.
 
