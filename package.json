@@ -2,6 +2,12 @@
   "name": "@gblab/crew",
   "version": "1.0.0",
   "description": "Set up the Crew of AI agents in your harnesses.",
+  "homepage": "https://github.com/gerardbalaoro/crew#readme",
+  "bugs": {
+    "url": "https://github.com/gerardbalaoro/crew/issues"
+  },
+  "license": "MIT",
+  "author": "Gerard Balaoro",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gerardbalaoro/crew.git"
@@ -60,5 +66,8 @@
     "tsdown": "^0.22.14",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
