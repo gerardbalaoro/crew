@@ -36,6 +36,7 @@ jobs:
         id: amend
         if: steps.release.outputs.release_created == 'true'
         env:
+          GH_TOKEN: ${{ github.token }}
           GIT_AUTHOR_NAME: ${{ github.actor }}
           GIT_AUTHOR_EMAIL: ${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com
           GIT_COMMITTER_NAME: ${{ github.actor }}
@@ -51,6 +52,7 @@ jobs:
             git push --force-with-lease origin HEAD:main
             git tag -f "${{ steps.release.outputs.tag_name }}"
             git push --force origin "${{ steps.release.outputs.tag_name }}"
+            gh release edit "${{ steps.release.outputs.tag_name }}" --target "$(git rev-parse HEAD)"
           fi
 
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
