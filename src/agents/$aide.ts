@@ -14,6 +14,12 @@ const Aide = defineAgent({
     write: true,
     delegate: [Recon.name, Scholar.name],
   },
+  harness: {
+    claude: {
+      model: "opus",
+      effort: "low",
+    },
+  },
   prompt: markdown`
     ## Role
 

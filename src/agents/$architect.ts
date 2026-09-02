@@ -15,6 +15,13 @@ const Architect = defineAgent({
     write: false,
     delegate: [Recon.name, Scholar.name],
   },
+  harness: {
+    claude: {
+      permissionMode: "plan",
+      model: "opus",
+      effort: "medium",
+    },
+  },
   prompt: markdown`
     ## Role
 

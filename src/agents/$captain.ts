@@ -17,6 +17,12 @@ const Captain = defineAgent({
     write: true,
     delegate: [Recon.name, Scholar.name, Architect.name, Engineer.name, Sentinel.name],
   },
+  harness: {
+    claude: {
+      model: "opus",
+      effort: "high",
+    },
+  },
   prompt: markdown`
     ## Role
 

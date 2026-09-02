@@ -6,10 +6,14 @@ export type AgentPermissions = {
   delegate?: boolean | string[];
 };
 
+type HarnessConfigProperty = string | number | boolean;
+type HarnessConfig = Record<string, HarnessConfigProperty | HarnessConfigProperty[]>;
+
 export type Agent = {
   name: string;
   type: "main" | "worker" | "general";
   description?: string | undefined;
+  harness?: Record<string, HarnessConfig>;
   permission?: AgentPermissions;
   prompt: string;
 };

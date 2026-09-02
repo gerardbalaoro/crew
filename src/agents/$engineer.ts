@@ -12,6 +12,12 @@ const Engineer = defineAgent({
     write: true,
     delegate: false,
   },
+  harness: {
+    claude: {
+      model: "opus",
+      effort: "medium",
+    },
+  },
   prompt: markdown`
     ## Role
 

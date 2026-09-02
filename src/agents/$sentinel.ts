@@ -14,6 +14,12 @@ const Sentinel = defineAgent({
     write: false,
     delegate: [Recon.name, Scholar.name],
   },
+  harness: {
+    claude: {
+      model: "opus",
+      effort: "medium",
+    },
+  },
   prompt: markdown`
     ## Role
 

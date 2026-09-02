@@ -29,5 +29,6 @@ export function render(agent: Agent): string {
     name: agent.name,
     description: agent.description ?? "",
     tools: tools(agent.permission ?? {}),
+    ...agent.harness?.claude,
   });
 }

@@ -12,6 +12,12 @@ const Recon = defineAgent({
     write: false,
     delegate: false,
   },
+  harness: {
+    claude: {
+      model: "sonnet",
+      effort: "low",
+    },
+  },
   prompt: markdown`
     ## Role
 
