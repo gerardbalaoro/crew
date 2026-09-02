@@ -1,6 +1,6 @@
 {
   "name": "@gblab/crew",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Set up the Crew of AI agents in your harnesses.",
   "bin": {
     "crew": "dist/bin.mjs"
