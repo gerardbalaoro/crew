@@ -14,11 +14,46 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+      sha: ${{ steps.amend.outputs.sha }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: node
+
+      - uses: actions/checkout@v4
+        if: steps.release.outputs.release_created == 'true'
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        if: steps.release.outputs.release_created == 'true'
+
+      - run: bun install --frozen-lockfile
+        if: steps.release.outputs.release_created == 'true'
+
+      - name: Format release commit
+        id: amend
+        if: steps.release.outputs.release_created == 'true'
+        env:
+          GIT_AUTHOR_NAME: ${{ github.actor }}
+          GIT_AUTHOR_EMAIL: ${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com
+          GIT_COMMITTER_NAME: ${{ github.actor }}
+          GIT_COMMITTER_EMAIL: ${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com
+        run: |
+          bun run format
+
+          if git diff --quiet; then
+            echo "Formatting already clean."
+          else
+            git add -A
+            git commit --amend --no-edit
+            git push --force-with-lease origin HEAD:main
+            git tag -f "${{ steps.release.outputs.tag_name }}"
+            git push --force origin "${{ steps.release.outputs.tag_name }}"
+          fi
+
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   publish:
     needs: release
@@ -29,6 +64,8 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release.outputs.sha }}
       - uses: oven-sh/setup-bun@v2
       - uses: actions/setup-node@v4
         with:
