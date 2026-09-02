@@ -2,6 +2,10 @@
   "name": "@gblab/crew",
   "version": "0.1.0",
   "description": "Set up the Crew of AI agents in your harnesses.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gerardbalaoro/crew.git"
+  },
   "bin": {
     "crew": "dist/bin.mjs"
   },
