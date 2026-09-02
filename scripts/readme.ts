@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 
-import { AgentList, type Agent } from "#agents";
+import { AgentList } from "#agents";
 
 const README_PATH = "README.md";
 const START = "<!-- agents: start -->";
