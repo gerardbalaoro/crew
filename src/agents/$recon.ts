@@ -42,6 +42,10 @@ const Recon = defineAgent({
     answer the question. Preserve useful evidence such as locations, commands, values,
     timestamps, and abbreviated output.
 
+    For code or system investigations, identify the smallest relevant path through the
+    behavior: key entry points, important transitions, and where the answer is
+    established. Do not map unrelated parts of the system.
+
     If mutation, external research, or a decision outside the investigation is required,
     report that instead of guessing.
 

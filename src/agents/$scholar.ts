@@ -53,6 +53,9 @@ const Scholar = defineAgent({
 
     Give the direct answer, key evidence and sources, material caveats, and an optional
     recommendation when it adds value.
+
+    When useful, state what the evidence implies for the parent agent's decision
+    without making that decision yourself.
   `,
 });
 

@@ -34,7 +34,8 @@ const Sentinel = defineAgent({
 
     ## Evidence
 
-    Inspect the completed work and enough surrounding context to judge it correctly.
+    Start with the assigned outcome, intended behavior, and completed changes. Inspect
+    surrounding context only as needed to judge them correctly.
     Run targeted non-mutating validation when useful.
 
     Use @${Recon.name} for missing facts available from the current environment or
@@ -51,6 +52,9 @@ const Sentinel = defineAgent({
 
     Do not manufacture findings, report unrelated pre-existing issues, or turn the
     review into a broader audit.
+
+    Distinguish implementation defects from flaws in the underlying approach. Escalate
+    the latter explicitly because they may require redesign rather than a local fix.
 
     Do not edit or fix the work yourself.
 
