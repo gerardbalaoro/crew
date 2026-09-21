@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.0](https://github.com/gerardbalaoro/crew/compare/v1.0.0...v1.1.0) (2026-09-21)
+
+
+### Features
+
+* **agents:** finalize requirements before implementation planning ([7a90b52](https://github.com/gerardbalaoro/crew/commit/7a90b52f66435c363f901e64fbe4c5a8635ccf58))
+* **agents:** scope reviews and track integration coverage ([ecd7848](https://github.com/gerardbalaoro/crew/commit/ecd7848111fd6bd4408322b38f479e1011dceece))
+* **agents:** tighten delegation boundaries and escalation behavior ([5c33c31](https://github.com/gerardbalaoro/crew/commit/5c33c312a26c9f2e1ff38529a742dcbec72cdc0c)), closes [#4](https://github.com/gerardbalaoro/crew/issues/4)
+* **codex:** support agent metadata and permissions ([16be9c6](https://github.com/gerardbalaoro/crew/commit/16be9c6622dbd12c6bd0dcfedf75bf3ea1751aef))
+
+
+### Bug Fixes
+
+* **agents:** reject oversized engineer assignments ([6d0700a](https://github.com/gerardbalaoro/crew/commit/6d0700ad61d8b5dec3811cac29e8d5b69cbd53f1))
+
 ## 1.0.0 (2026-09-02)
 
 ### Features
