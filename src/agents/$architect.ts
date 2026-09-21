@@ -68,6 +68,9 @@ const Architect = defineAgent({
     Keep each task small and include its scope, necessary context, relevant acceptance
     criteria, and focused validation. Leave routine implementation details to its owner.
 
+    Plan review around coherent outcomes and their risks, including integration between
+    related changes when separate reviews would miss their interactions.
+
     Design for safe parallel execution. Tasks may share a wave only when they do not
     depend on each other's outputs, do not modify overlapping state, and can be
     validated independently. Make dependencies explicit and sequence everything else.

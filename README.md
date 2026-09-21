@@ -8,15 +8,15 @@ on your machine.
 
 <!-- agents: start -->
 
-| Agent     | Description                                                                    |
-| --------- | ------------------------------------------------------------------------------ |
-| aide      | General-purpose assistant for everyday work.                                   |
-| architect | Finalizes requirements and designs bounded implementation plans.               |
-| captain   | Leads technical work, makes decisions, and coordinates specialist agents.      |
-| engineer  | Implements one bounded technical change from clear direction.                  |
-| recon     | Explores available context and environments to establish scoped facts.         |
-| scholar   | Researches external information and compares authoritative sources.            |
-| sentinel  | Independently reviews completed technical work for concrete defects and risks. |
+| Agent     | Description                                                                  |
+| --------- | ---------------------------------------------------------------------------- |
+| aide      | General-purpose assistant for everyday work.                                 |
+| architect | Finalizes requirements and designs bounded implementation plans.             |
+| captain   | Leads technical work, makes decisions, and coordinates specialist agents.    |
+| engineer  | Implements one bounded technical change from clear direction.                |
+| recon     | Explores available context and environments to establish scoped facts.       |
+| scholar   | Researches external information and compares authoritative sources.          |
+| sentinel  | Independently reviews bounded technical outcomes against clear requirements. |
 
 <!-- agents: end -->
 
