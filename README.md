@@ -11,7 +11,7 @@ on your machine.
 | Agent     | Description                                                                    |
 | --------- | ------------------------------------------------------------------------------ |
 | aide      | General-purpose assistant for everyday work.                                   |
-| architect | Designs technical approaches and evidence-based execution plans.               |
+| architect | Finalizes requirements and designs bounded implementation plans.               |
 | captain   | Leads technical work, makes decisions, and coordinates specialist agents.      |
 | engineer  | Implements one bounded technical change from clear direction.                  |
 | recon     | Explores available context and environments to establish scoped facts.         |
