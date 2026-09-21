@@ -1,9 +1,8 @@
 import matter from "gray-matter";
 
 type MarkdownValue = string | number | bigint | boolean | null | undefined;
-export type MarkdownData = {
-  [key: string]: MarkdownValue | MarkdownValue[] | Record<string, MarkdownValue | MarkdownValue[]>;
-};
+type MarkdownProperty = MarkdownValue | MarkdownData | MarkdownProperty[];
+export type MarkdownData = { [key: string]: MarkdownProperty };
 
 export function renderMarkdown(content: string, data: MarkdownData): string {
   return matter.stringify(content, data);
