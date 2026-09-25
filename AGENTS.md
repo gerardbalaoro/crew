@@ -22,4 +22,3 @@ System prompts for agents should be concise and direct.
 - Avoid over-instruction, treat each word as possible context bloat.
 - Prose must be around 50-80 lines.
 - Prose must be human-readable and well structured.
-
