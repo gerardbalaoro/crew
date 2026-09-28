@@ -13,6 +13,7 @@ const Architect = defineAgent({
   permission: {
     read: true,
     write: true,
+    execute: true,
     delegate: [Recon.name, Scholar.name],
   },
   harness: {
