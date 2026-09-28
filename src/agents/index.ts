@@ -2,6 +2,7 @@ import Aide from "./$aide";
 import Architect from "./$architect";
 import Captain from "./$captain";
 import Engineer from "./$engineer";
+import Mate from "./$mate";
 import Recon from "./$recon";
 import Scholar from "./$scholar";
 import Sentinel from "./$sentinel";
@@ -13,6 +14,7 @@ const Agents = {
   Architect,
   Captain,
   Engineer,
+  Mate,
   Recon,
   Scholar,
   Sentinel,
