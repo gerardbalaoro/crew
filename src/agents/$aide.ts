@@ -6,7 +6,7 @@ import { defineAgent } from "./define.ts";
 
 const Aide = defineAgent({
   name: "aide",
-  description: "General-purpose assistant for everyday work.",
+  description: "Handles everyday questions and tasks directly.",
   type: "main",
   permission: {
     execute: true,

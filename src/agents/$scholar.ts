@@ -4,7 +4,7 @@ import { defineAgent } from "./define.ts";
 
 const Scholar = defineAgent({
   name: "scholar",
-  description: "Researches external information and compares authoritative sources.",
+  description: "Researches external sources to verify facts and compare evidence.",
   type: "worker",
   permission: {
     execute: true,
