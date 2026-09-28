@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/gerardbalaoro/crew/compare/v1.1.0...v1.2.0) (2026-09-28)
+
+
+### Features
+
+* **agents:** add mate execution orchestrator ([4b32ce0](https://github.com/gerardbalaoro/crew/commit/4b32ce0f544f710ab4d8c943873c21b85676b808))
+* **agents:** allow architect command execution ([5a207a3](https://github.com/gerardbalaoro/crew/commit/5a207a3c2b771924032f9d593e80e30d450ff3ca))
+* **agents:** generalize roles and clarify descriptions ([9b6d3b5](https://github.com/gerardbalaoro/crew/commit/9b6d3b584c54ddef4abe60ee9c857016e20c73da))
+
 ## [1.1.0](https://github.com/gerardbalaoro/crew/compare/v1.0.0...v1.1.0) (2026-09-21)
 
 ### Features
