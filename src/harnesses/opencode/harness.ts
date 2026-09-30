@@ -11,10 +11,10 @@ import { render } from "./render";
 
 function getDirectory(global?: boolean) {
   if (global) {
-    return process.env.OPENCODE_CONFIG_DIR ?? join(UserConfig, "opencode");
+    return join(process.env.OPENCODE_CONFIG_DIR ?? join(UserConfig, "opencode"), "agent");
   }
 
-  return join(process.cwd(), ".opencode");
+  return join(process.cwd(), ".opencode", "agent");
 }
 
 const listFiles = async (location: string) => {

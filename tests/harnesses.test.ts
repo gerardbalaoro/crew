@@ -1,84 +1,93 @@
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
+
+import Claude from "#harnesses/claude/harness";
+import Codex from "#harnesses/codex/harness";
+import Omp from "#harnesses/omp/harness";
+import OpenCode from "#harnesses/opencode/harness";
 
 import Architect from "../src/agents/$architect.ts";
 import Engineer from "../src/agents/$engineer.ts";
 import { AgentList } from "../src/agents/index.ts";
 import { render as renderClaude } from "../src/harnesses/claude/render.ts";
 import { render as renderCodex } from "../src/harnesses/codex/render.ts";
-import { Harnesses } from "../src/harnesses/index.ts";
 import { render as renderOmp } from "../src/harnesses/omp/render.ts";
 import { render as renderOpenCode } from "../src/harnesses/opencode/render.ts";
 
 describe("harness adapters", () => {
-  test("applies, lists, and removes all agent files", async () => {
-    const root = await mkdtemp(join(tmpdir(), "crew-harness-test-"));
-    const previousEnvironment = {
-      CLAUDE_CONFIG_DIR: process.env.CLAUDE_CONFIG_DIR,
-      CODEX_HOME: process.env.CODEX_HOME,
-      OPENCODE_CONFIG_DIR: process.env.OPENCODE_CONFIG_DIR,
-      PI_CODING_AGENT_DIR: process.env.PI_CODING_AGENT_DIR,
-    };
-    const names = AgentList.map((agent) => agent.name);
+  describe.each([
+    { scope: "global", global: true },
+    { scope: "project", global: false },
+  ])("$scope installations", (options) => {
+    test.each([
+      {
+        harness: Claude,
+        environment: "CLAUDE_CONFIG_DIR",
+        project: ".claude/agents",
+        directory: "agents",
+        extension: ".md",
+      },
+      {
+        harness: Codex,
+        environment: "CODEX_HOME",
+        project: ".codex/agents",
+        directory: "agents",
+        extension: ".toml",
+      },
+      {
+        harness: Omp,
+        environment: "PI_CODING_AGENT_DIR",
+        project: ".omp/agents",
+        directory: "agents",
+        extension: ".md",
+      },
+      {
+        harness: OpenCode,
+        environment: "OPENCODE_CONFIG_DIR",
+        project: ".opencode/agent",
+        directory: "agent",
+        extension: ".md",
+      },
+    ])("manages $harness.name agents in its discovery directory", async (scenario) => {
+      const root = await mkdtemp(join(tmpdir(), "crew-harness-test-"));
+      const config = join(root, "config");
+      const directory = options.global
+        ? join(config, scenario.directory)
+        : join(root, scenario.project);
+      const names = AgentList.map((agent) => agent.name);
+      const foreign = join(directory, `foreign${scenario.extension}`);
+      const existing = join(directory, `architect${scenario.extension}`);
+      const cwd = vi.spyOn(process, "cwd").mockReturnValue(root);
+      vi.stubEnv(scenario.environment, config);
 
-    process.env.CLAUDE_CONFIG_DIR = join(root, "claude");
-    process.env.CODEX_HOME = join(root, "codex");
-    process.env.OPENCODE_CONFIG_DIR = join(root, "opencode");
-    process.env.PI_CODING_AGENT_DIR = join(root, "omp");
+      try {
+        expect(await scenario.harness.list(options)).toEqual([]);
+        expect(await scenario.harness.remove(options)).toBe(0);
 
-    try {
-      for (const harness of Harnesses) {
-        expect(await harness.apply({ global: true })).toBe(names.length);
-        expect((await harness.list({ global: true })).sort()).toEqual(names);
+        await mkdir(directory, { recursive: true });
+        await writeFile(foreign, "Keep this foreign agent.");
+        await writeFile(existing, "Outdated Crew agent.");
+        expect(await scenario.harness.list(options)).toEqual(["architect"]);
+
+        expect(await scenario.harness.apply(options)).toBe(names.length);
+        expect((await readdir(directory)).sort()).toEqual(
+          [...names, "foreign"].map((name) => `${name}${scenario.extension}`).sort(),
+        );
+        expect(await readFile(existing, "utf-8")).not.toBe("Outdated Crew agent.");
+        expect((await scenario.harness.list(options)).sort()).toEqual(names);
+
+        expect(await scenario.harness.remove(options)).toBe(names.length);
+        expect(await scenario.harness.list(options)).toEqual([]);
+        expect(await readdir(directory)).toEqual([`foreign${scenario.extension}`]);
+        expect(await readFile(foreign, "utf-8")).toBe("Keep this foreign agent.");
+      } finally {
+        cwd.mockRestore();
+        vi.unstubAllEnvs();
+        await rm(root, { recursive: true, force: true });
       }
-
-      for (const harness of Harnesses) {
-        expect(await harness.remove({ global: true })).toBe(names.length);
-        expect(await harness.list({ global: true })).toEqual([]);
-      }
-    } finally {
-      await rm(root, { recursive: true, force: true });
-
-      for (const [name, value] of Object.entries(previousEnvironment)) {
-        if (value === undefined) {
-          delete process.env[name];
-        } else {
-          process.env[name] = value;
-        }
-      }
-    }
-  });
-
-  test("remove ignores files from other tools", async () => {
-    const root = await mkdtemp(join(tmpdir(), "crew-foreign-test-"));
-    const previousEnvironment = {
-      CLAUDE_CONFIG_DIR: process.env.CLAUDE_CONFIG_DIR,
-      CODEX_HOME: process.env.CODEX_HOME,
-      OPENCODE_CONFIG_DIR: process.env.OPENCODE_CONFIG_DIR,
-      PI_CODING_AGENT_DIR: process.env.PI_CODING_AGENT_DIR,
-    };
-
-    process.env.CLAUDE_CONFIG_DIR = join(root, "claude");
-    process.env.CODEX_HOME = join(root, "codex");
-    process.env.OPENCODE_CONFIG_DIR = join(root, "opencode");
-    process.env.PI_CODING_AGENT_DIR = join(root, "omp");
-    try {
-      for (const harness of Harnesses) {
-        expect(await harness.remove({ global: true })).toBe(0);
-      }
-    } finally {
-      await rm(root, { recursive: true, force: true });
-
-      for (const [name, value] of Object.entries(previousEnvironment)) {
-        if (value === undefined) {
-          delete process.env[name];
-        } else {
-          process.env[name] = value;
-        }
-      }
-    }
+    });
   });
   test("harness config renders only into its own harness", () => {
     const renderForHarness = [
