@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/gerardbalaoro/crew/compare/v1.2.0...v1.2.1) (2026-09-30)
+
+
+### Bug Fixes
+
+* **opencode:** install agents in the agent directory ([dd08adf](https://github.com/gerardbalaoro/crew/commit/dd08adf48b0b7394872501a40392cf6950b8b534))
+
 ## [1.2.0](https://github.com/gerardbalaoro/crew/compare/v1.1.0...v1.2.0) (2026-09-28)
 
 ### Features
